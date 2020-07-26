@@ -1,1 +1,1 @@
-web: bin/porty
+web: bin\porty.exe

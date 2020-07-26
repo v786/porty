@@ -1,5 +1,9 @@
 
-# go-getting-started
+# Portfolio
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+- [Visit the site](https://afternoon-citadel-13788.herokuapp.com/)
 
 A barebones Go app, which can easily be deployed to Heroku.
 
@@ -36,13 +40,8 @@ $ git push heroku master
 $ heroku open
 ```
 
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-
 ## Documentation
 
 For more information about using Go on Heroku, see these Dev Center articles:
 
-- [Go on Heroku](https://devcenter.heroku.com/categories/go)
+
