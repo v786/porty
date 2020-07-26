@@ -32,8 +32,6 @@ func main() {
 
 	router := gin.New()
 	router.Use(gin.Logger())
-	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
 
 	router.GET("/", home)
 
@@ -51,12 +49,14 @@ func getData(fileName string) GalleryGrid {
 
 	return data
 }
+
 func home(c *gin.Context) {
 	data := make(map[string]interface{})
 	gallreyList := getData("templates/test.json")
 	time := time.Now()
 	data["time"] = time.Unix()
 	data["galleryList"] = gallreyList
+
 	c.HTML(http.StatusOK, "index.tmpl.html", data)
 }
 
