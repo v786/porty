@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -23,6 +24,11 @@ type GalleryObj struct {
 	Img   string `json: "img"`
 }
 
+type MessgaeDetails struct {
+	SenderName string
+	Message    string
+}
+
 func main() {
 	port := os.Getenv("PORT")
 
@@ -35,8 +41,9 @@ func main() {
 	router.LoadHTMLGlob("templates/*.tmpl.html")
 	router.Static("/static", "static")
 
-	router.GET("/", home)
+	router.POST("/message", contact)
 
+	router.GET("/", home)
 	router.GET("/mark", mark)
 
 	router.Run(":" + port)
@@ -58,6 +65,19 @@ func home(c *gin.Context) {
 	time := time.Now()
 	data["time"] = time.Unix()
 	data["galleryList"] = gallreyList
+	c.HTML(http.StatusOK, "index.tmpl.html", data)
+}
+
+func contact(c *gin.Context) {
+	data := make(map[string]interface{})
+
+	cName := c.PostForm("name")
+	cMessage := c.PostForm("message")
+
+	fmt.Println(cName, cMessage)
+
+	data["details"] = MessgaeDetails{cName, cMessage}
+
 	c.HTML(http.StatusOK, "index.tmpl.html", data)
 }
 
