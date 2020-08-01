@@ -2,48 +2,55 @@
 {{template "header.tmpl.html"}}
 
 <body>
-
   <!-- MAIN (Center website) -->
-  <div class="main">
+  <div class="container">
+    {{template "nav.tmpl.html"}}
 
-    <h1>MYLOGO.COM</h1>
-    <hr>
-
-    <p>A unix time stamp, if you ever need one :: <span>{{.time}}</span></p>
-
-    <h2>PORTFOLIO</h2>
-
-    <!-- Portfolio Gallery Grid -->
     <div class="row">
-      {{range .galleryList.GalleryObjects}}
-      <div class="column">
-        <div class="content">
-          <img src={{.Img}} alt="Linked In Profile Pic" style="width:100%">
-          <h3>{{.Title}}</h3>
-          <p><a href={{.Link}}>Visit</a></p>
+      <div class="col">
+        <div class="jumbotron">
+          <h1 class="display-2">Hello, world!</h1>
+          <p>A unix time stamp, if you ever need one :: <span>{{.time}}</span></p>
         </div>
       </div>
-      {{end}}
+    </div>
+
+    <!-- Portfolio Gallery Grid -->
+    <div class="container">
+      <div class="row">
+        <div class="col p-2 m-2 border">
+          {{range .galleryList.GalleryObjects}}
+          <div class="card m-2" style="width: 8rem;">
+            <img src="{{.Img}}" class="card-img-top" alt="Linked In Profile Pic">
+            <div class="card-body">
+              <h5 class="card-title">{{.Title}}</h5>
+              <a href={{.Link}} class="btn btn-primary">Visit</a>
+            </div>
+          </div>
+          {{end}}
+        </div>
+        <!-- Start Contact -->
+        <div class="col p-2 m-2 border">
+          <form action="/message" method="POST">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input name="name" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Message</label>
+              <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <!-- END Contact -->
+
+      </div>
     </div>
     <!-- END MAIN -->
 
     {{.details}}
-
-    <!-- Start Contact -->
-    <div class="container">
-      <form action="/message" method="POST">
-
-        <label for="fname">Name</label>
-        <input type="text" id="fname" name="name" placeholder="Your name..">
-
-        <label for="message">Message</label>
-        <textarea id="subject" name="message" placeholder="Write something.." style="height:200px"></textarea>
-
-        <input type="submit" value="Submit">
-
-      </form>
-    </div>
-    <!-- END -->
 
   </div>
 
